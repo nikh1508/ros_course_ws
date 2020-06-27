@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="ros_service" type="bb8_move_in_circle_service_server.py" name="bb8_move_server" output="screen" />
+
+        <node pkg="ros_service" type="bb8_move_in_circle_service_client.py" name="bb8_move_client" output="screen" />
+
+</launch>

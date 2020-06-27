@@ -1,0 +1,7 @@
+<launch>
+
+<!-- <include file="$(find ardrone_as)/launch/action_server.launch" /> -->
+
+<node pkg="ros_actions" type="ardrone_action_client.py" name="ardrone_action_client" output="screen" />
+
+</launch>
