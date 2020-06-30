@@ -1,0 +1,16 @@
+base_link : box size="0.01 0.01 0.01"
+head_link : cylinder radius="0.05" length="0.04"
+upper_leg_links : cylinder length="0.06" radius="0.0025"
+lower_leg_links : cylinder length="0.06" radius="0.0015"
+foot_links : sphere radius="0.008"
+
+base_link : mass=None, there is no inertia needed because its a non-functional element.
+head_link : mass value="0.01"
+upper_leg_links : mass value="0.01"
+lower_leg_links : mass value="0.01"
+foot_links : mass value="0.01"
+
+kp = 1000.0
+kd = 1000.0
+mu1 = 10.0
+mu2 = 10.0
