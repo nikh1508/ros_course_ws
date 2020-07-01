@@ -45,6 +45,20 @@
         </visual>
     </link>
 
+    <gazebo>
+        <plugin name="gazebo_ros_imu_controller" filename="libgazebo_ros_imu.so">
+            <robotNamespace>/gurdy</robotNamespace>
+            <topicName>imu/data</topicName>
+            <serviceName>imu/service</serviceName>
+            <bodyName>base_link</bodyName>
+            <gaussianNoise>0</gaussianNoise>
+            <rpyOffsets>0 0 0</rpyOffsets>
+            <updateRate>10.0</updateRate>
+            <alwaysOn>true</alwaysOn>
+            <gaussianNoise>0</gaussianNoise>
+        </plugin>
+    </gazebo>
+
     <link name="head_link">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>

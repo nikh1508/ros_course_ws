@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <arg name="joint_upper_initial" default="-1.0" />
-    <arg name="joint_lower_initial" default="-0.7" />
-    <include file="$(find my_gurdy_description)/launch/spawn_urdf.launch">
-        <arg name="x" value="0.0" />
-        <arg name="y" value="0.0" />
-        <arg name="z" value="0.2" />
-        <arg name="urdf_robot_file" value="$(find my_gurdy_description)/urdf/gurdy.urdf" />
-        <arg name="robot_name" value="gurdy" />
-        <arg name="joint_arguements" value="-J head_upperlegM1_joint $(arg joint_upper_initial) -J head_upperlegM2_joint $(arg joint_upper_initial) -J head_upperlegM3_joint $(arg joint_upper_initial)
-        -J upperlegM1_lowerlegM1_joint $(arg joint_lower_initial) -J upperlegM2_lowerlegM2_joint $(arg joint_lower_initial) -J upperlegM3_lowerlegM3_joint $(arg joint_lower_initial)"/>
-    </include>
+    <include file="$(find my_gurdy_description)/launch/spawn_gurdy_with_controller.launch"/>
+    <include file="$(find my_gurdy_description)/launch/gurdy_control.launch"/>
 </launch>
