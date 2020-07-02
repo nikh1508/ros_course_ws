@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<robot name="gurdy" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find my_gurdy_description)/urdf/xacro/gurdy.materials" />
+    <xacro:include filename="$(find my_gurdy_description)/urdf/xacro/gurdy.links" />
+    <xacro:include filename="$(find my_gurdy_description)/urdf/xacro/gurdy.joints" />
+    <xacro:include filename="$(find my_gurdy_description)/urdf/xacro/gurdy.gazebo" />
+    <xacro:include filename="$(find my_gurdy_description)/urdf/xacro/gurdy.trans" />
+</robot>

@@ -6,7 +6,7 @@
         <arg name="x" value="0.0" />
         <arg name="y" value="0.0" />
         <arg name="z" value="0.2" />
-        <arg name="urdf_robot_file" value="$(find my_gurdy_description)/urdf/gurdy.urdf" />
+        <arg name="urdf_robot_file" value="$(find my_gurdy_description)/urdf/gurdy_xacro.urdf" />
         <arg name="robot_name" value="gurdy" />
         <arg name="joint_arguements" value="-J head_upperlegM1_joint $(arg joint_upper_initial) -J head_upperlegM2_joint $(arg joint_upper_initial) -J head_upperlegM3_joint $(arg joint_upper_initial)
         -J upperlegM1_lowerlegM1_joint $(arg joint_lower_initial) -J upperlegM2_lowerlegM2_joint $(arg joint_lower_initial) -J upperlegM3_lowerlegM3_joint $(arg joint_lower_initial)"/>

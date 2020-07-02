@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<robot name="gurdy" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="upperleg_radius" value="0.0025"/>
+    <xacro:property name="upperleg_length" value="0.06"/>
+    <xacro:property name="upperleg_mass" value="0.01"/>
+    <xacro:property name="upperleg_mesh" value="package://my_gurdy_description/models/gurdy/meshes/gurdy_higherleg_v2.dae"/>
+
+    <xacro:property name="lowerleg_radius" value="0.0015"/>
+    <xacro:property name="lowerleg_length" value="0.06"/>
+    <xacro:property name="lowerleg_mass" value="${upperleg_mass}"/>
+    <xacro:property name="lowerleg_mesh" value="package://my_gurdy_description/models/gurdy/meshes/gurdy_lowerleg_v2.dae"/>
+
+    <xacro:property name="foot_radius" value="0.008"/>
+    <xacro:property name="foot_mass" value="0.02"/>
+
+    <xacro:macro name="default_origin">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="box_inertia" params="x y z m">
+        <mass value="${mass}"/>
+        <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0" iyy="${m*(x*x+z*z)/12}" iyz = "0" izz="${m*(x*x+z*z)/12}" /> 
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertia" params="r h m">
+        <mass value="${mass}"/>
+        <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0" iyy="${m*(3*r*r+h*h)/12}" iyz = "0" izz="${m*r*r/2}" />
+    </xacro:macro>
+
+    <xacro:macro name="sphere_inertia" params="r m">
+        <mass value="${mass}"/>
+        <inertia  ixx="${2*m*r*r/5}" ixy = "0" ixz = "0" iyy="${2*m*r*r/5}" iyz = "0" izz="${2*m*r*r/5}" />
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_links" params="name radius length mass mesh_file">
+        <link name="${name}_link">
+            <inertial>
+                <xacro:default_origin />
+                <xacro:cylinder_inertia r="${radius}" h="${length}" m="${mass}"/>
+            </inertial>
+
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+            </collision>
+
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <mesh filename="${mesh_file}"/>
+                </geometry>
+            </visual>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="sphere_links" params="name radius mass color">
+        <link name="${name}_link">
+            <inertial>
+                <xacro:default_origin />
+                <xacro:sphere_inertia r="${radius}" m="${mass}"/>
+            </inertial>
+
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <sphere radius="${radius}"/>
+                </geometry>
+            </collision>
+
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <sphere radius="${radius}"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+        </link>
+    </xacro:macro>
+
+    <link name="base_link">
+        <collision>
+            <xacro:default_origin />
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+
+        <visual>
+            <xacro:default_origin />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+            <material name="yellow"/>
+        </visual>
+    </link>
+
+    <xacro:cylinder_links name="head" radius="0.05" length="0.04" mass="0.01" mesh_file="package://my_gurdy_description/models/gurdy/meshes/gurdy_head_v2.dae"/>
+    
+    <xacro:cylinder_links name="upperleg_M1" radius="${upperleg_radius}" length="${upperleg_length}" mass="${upperleg_mass}" mesh_file="${upperleg_mesh}"/>
+    <xacro:cylinder_links name="upperleg_M2" radius="${upperleg_radius}" length="${upperleg_length}" mass="${upperleg_mass}" mesh_file="${upperleg_mesh}"/>
+    <xacro:cylinder_links name="upperleg_M3" radius="${upperleg_radius}" length="${upperleg_length}" mass="${upperleg_mass}" mesh_file="${upperleg_mesh}"/>
+
+    <xacro:cylinder_links name="lowerleg_M1" radius="${lowerleg_radius}" length="${lowerleg_length}" mass="${lowerleg_mass}" mesh_file="${lowerleg_mesh}"/>
+    <xacro:cylinder_links name="lowerleg_M2" radius="${lowerleg_radius}" length="${lowerleg_length}" mass="${lowerleg_mass}" mesh_file="${lowerleg_mesh}"/>
+    <xacro:cylinder_links name="lowerleg_M3" radius="${lowerleg_radius}" length="${lowerleg_length}" mass="${lowerleg_mass}" mesh_file="${lowerleg_mesh}"/>
+
+    <xacro:sphere_links name="footM1" radius="${foot_radius}" mass="${foot_mass}" color="orange"/>
+    <xacro:sphere_links name="footM2" radius="${foot_radius}" mass="${foot_mass}" color="orange"/>
+    <xacro:sphere_links name="footM3" radius="${foot_radius}" mass="${foot_mass}" color="orange"/>
+    
+</robot>

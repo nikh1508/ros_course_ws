@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<robot name="gurdy" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:property name="effort_global" value="0.1"/>
+    <xacro:property name="velocity_global" value="0.005"/>
+
+    <xacro:property name="upperleg_lower_limit" value="-1.5"/>
+    <xacro:property name="upperleg_upper_limit" value="0"/>
+
+    <xacro:property name="lowerleg_lower_limit" value="-2.9"/>
+    <xacro:property name="lowerleg_upper_limit" value="1.5708"/>
+
+    <xacro:macro name="fixed_joints" params="name parent child xyz rpy">
+        <joint name="${name}_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="legs_joints" params="name parent child xyz rpy lim_lower lim_upper">
+        <joint name="${name}_joint" type="revolute">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <limit lower="${lim_lower}" upper="${lim_upper}" effort="${effort_global}" velocity="${velocity_global}"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:fixed_joints name="fixed" parent="base_link" child="head_link" xyz="0 0 0" rpy="0 0 0"/>
+
+    <xacro:legs_joints name="head_upperlegM1" parent="head_link" child="upperleg_M1_link" xyz="-0.02165 -0.0125 -0.008" rpy="3.14159 -1.05879e-22 0.523599" lim_lower="${upperleg_lower_limit}" lim_upper="${upperleg_upper_limit}"/>
+    <xacro:legs_joints name="head_upperlegM2" parent="head_link" child="upperleg_M2_link" xyz="0.02165 -0.0125 -0.008" rpy="3.14159 0 2.61799" lim_lower="${upperleg_lower_limit}" lim_upper="${upperleg_upper_limit}"/>
+    <xacro:legs_joints name="head_upperlegM3" parent="head_link" child="upperleg_M3_link" xyz="0 0.025 -0.008" rpy="3.14159 0 -1.5708" lim_lower="${upperleg_lower_limit}" lim_upper="${upperleg_upper_limit}"/>
+
+    <xacro:legs_joints name="upperlegM1_lowerlegM1" parent="upperleg_M1_link" child="lowerleg_M1_link" xyz="0 0.0095 0.06" rpy="0 0 3.14159" lim_lower="${lowerleg_lower_limit}" lim_upper="${lowerleg_upper_limit}"/>
+    <xacro:legs_joints name="upperlegM2_lowerlegM2" parent="upperleg_M2_link" child="lowerleg_M2_link" xyz="0 0.0095 0.06" rpy="0 0 3.14159" lim_lower="${lowerleg_lower_limit}" lim_upper="${lowerleg_upper_limit}"/>
+    <xacro:legs_joints name="upperlegM3_lowerlegM3" parent="upperleg_M3_link" child="lowerleg_M3_link" xyz="0 0.0095 0.06" rpy="0 0 -3.14159" lim_lower="${lowerleg_lower_limit}" lim_upper="${lowerleg_upper_limit}"/>
+
+    <xacro:fixed_joints name="basefoot_peg_M1_joint" parent="lowerleg_M1_link" child="footM1_link" xyz="0 0 0.06" rpy="0 0 0"/>
+    <xacro:fixed_joints name="basefoot_peg_M2_joint" parent="lowerleg_M2_link" child="footM2_link" xyz="0 0 0.06" rpy="0 0 0"/>
+    <xacro:fixed_joints name="basefoot_peg_M3_joint" parent="lowerleg_M3_link" child="footM3_link" xyz="0 0 0.06" rpy="0 0 0"/>
+
+</robot>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<robot name="gurdy" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <xacro:macro name="materials" params="name rgba">
+      <material name="${name}">
+        <color rgba="${rgba}"/>
+      </material>  
+    </xacro:macro>
+
+    <xacro:materials name="orange" rgba="0.8 0.3 0 1"/>
+    <xacro:materials name="grey" rgba="0.75 0.75 0.75 1"/>
+    <xacro:materials name="red" rgba="0.6 0 0 1"/>
+    <xacro:materials name="green" rgba="0 0.5 0 1"/>
+    <xacro:materials name="blue" rgba="0 0 0.6 1"/>
+    <xacro:materials name="yellow" rgba="1 1 0.4 1"/>
+    
+</robot>
