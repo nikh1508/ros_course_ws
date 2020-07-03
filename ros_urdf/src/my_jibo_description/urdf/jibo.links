@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<robot name="jibo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="default_origin">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="default_origin2">
+        <origin xyz="0 0 0.01" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="box_inertia" params="x y z m">
+        <mass value="${mass}"/>
+        <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0" iyy="${m*(x*x+z*z)/12}" iyz = "0" izz="${m*(x*x+z*z)/12}" /> 
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertia" params="r h m">
+        <mass value="${mass}"/>
+        <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0" iyy="${m*(3*r*r+h*h)/12}" iyz = "0" izz="${m*r*r/2}" />
+    </xacro:macro>
+
+    <xacro:macro name="sphere_inertia" params="r m">
+        <mass value="${mass}"/>
+        <inertia  ixx="${2*m*r*r/5}" ixy = "0" ixz = "0" iyy="${2*m*r*r/5}" iyz = "0" izz="${2*m*r*r/5}" />
+    </xacro:macro>
+
+    <link name="base_link">
+        <collision>
+            <xacro:default_origin />
+            <geometry>
+                <!-- <cylinder radius="0.08" length="0.011"/> -->
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_base_v3.dae"/>
+            </geometry>
+        </collision>
+
+        <visual>
+            <xacro:default_origin />
+            <geometry>
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_base_v3.dae"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="waist_link">
+        <collision>
+            <xacro:default_origin />
+            <geometry>
+                <!-- <cylinder radius="0.08" length="0.011"/> -->
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_waist_v3.dae"/>
+            </geometry>
+        </collision>
+
+        <visual>
+            <xacro:default_origin />
+            <geometry>
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_waist_v3.dae"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="b" type="continuous">
+        <parent link="base_link"/>
+        <child link="waist_link"/>
+        <xacro:default_origin/>
+        <!-- <origin xyz="0 -0.003 0" rpy="0 0 0"/> -->
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="body_link">
+        <collision>
+            <xacro:default_origin />
+            <geometry>
+                <!-- <cylinder radius="0.08" length="0.011"/> -->
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_body_v3.dae"/>
+            </geometry>
+        </collision>
+
+        <visual>
+            <xacro:default_origin />
+            <geometry>
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_body_v3.dae"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="b2" type="continuous">
+        <parent link="waist_link"/>
+        <child link="body_link"/>
+        <!-- <xacro:default_origin/> -->
+        <origin xyz="0 0.005 0.053" rpy="-0.26 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="head_link">
+        <collision>
+            <xacro:default_origin />
+            <geometry>
+                <!-- <cylinder radius="0.08" length="0.011"/> -->
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_head_v5.dae"/>
+            </geometry>
+        </collision>
+
+        <visual>
+            <xacro:default_origin />
+            <geometry>
+                <mesh filename="package://my_jibo_description/models/jibo/meshes/jibo_final_parts_head_v5.dae"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="b3" type="continuous">
+        <parent link="body_link"/>
+        <child link="head_link"/>
+        <!-- <xacro:default_origin/> -->
+        <origin xyz="0 0.0 0.2" rpy="-0.26 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+</robot>

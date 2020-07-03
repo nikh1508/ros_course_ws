@@ -28,7 +28,7 @@ Panels:
     SyncMode: 0
     SyncSource: ""
 Preferences:
-  PromptSaveOnExit: false
+  PromptSaveOnExit: true
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
@@ -67,7 +67,22 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        waist_link:
+        head_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        upperleg_M1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        upperleg_M2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        upperleg_M3_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -120,7 +135,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.3135278224945068
+      Distance: 0.25431162118911743
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -135,10 +150,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.0047978730872273445
+      Pitch: 0.3047980070114136
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.6422562599182129
+      Yaw: 4.175426006317139
     Saved: ~
 Window Geometry:
   Displays:
