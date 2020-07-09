@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="project_controller" name="custom_controller" type="custom_control.py" output="screen"/>
+</launch>
